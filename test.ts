@@ -39,7 +39,7 @@ async function main() {
 
     try {
         const crafter = new QueryCrafter(config);
-        const nlpQuery = "show me all vehical details";
+        const nlpQuery = "show me all user whose email start with user and has role of user";
 
         console.log(`\nOriginal Query: "${nlpQuery}"\n`);
 

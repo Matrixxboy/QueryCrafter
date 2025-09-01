@@ -1,7 +1,9 @@
+// src/validator.ts
+
 import { parse, AST } from 'sql-parser';
 import { Schema } from './schema';
 
-export function validateSQL(sql: string, schema: Schema): boolean {
+export function validateSQL(sql: string, schema: Schema): string {
   try {
     // 1. Extract the SQL from a potential code block
     let cleanSql = sql.trim();
@@ -9,19 +11,20 @@ export function validateSQL(sql: string, schema: Schema): boolean {
     if (match && match[1]) {
       cleanSql = match[1];
     }
-
+    
     // 2. Remove any remaining trailing whitespace and semicolons
     cleanSql = cleanSql.trim().replace(/;$/, '');
 
+    // 3. Parse and validate the cleaned SQL
     const ast: AST = parse(cleanSql);
 
-    // 3. The rest of your validation logic...
+    // 4. Use the correct AST properties for validation
     if (!ast.fields || !ast.source) {
       throw new Error('Only SELECT statements are allowed.');
     }
 
     if (!ast.from) {
-      return true;
+      return cleanSql;
     }
 
     const tables = ast.from.map((f: any) => f.table);
@@ -30,7 +33,8 @@ export function validateSQL(sql: string, schema: Schema): boolean {
         throw new Error(`Table "${table}" not found in the schema.`);
       }
     }
-
+    
+    // Validate columns
     if (Array.isArray(ast.fields)) {
       for (const column of ast.fields) {
         if (column.expr && column.expr.type === 'column_ref') {
@@ -46,7 +50,7 @@ export function validateSQL(sql: string, schema: Schema): boolean {
       }
     }
 
-    return true;
+    return cleanSql;
   } catch (e: any) {
     throw new Error(`Invalid SQL: ${e.message}`);
   }
