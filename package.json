@@ -1,7 +1,7 @@
 {
   "name": "querycrafter",
   "version": "0.0.1",
-  "description": "QueryCrafter intelligently translates natural language into accurate SQL queries. This npm module simplifies database interactions by allowing you to retrieve data using plain English, eliminating the need for complex code. It's a powerful and intuitive way to talk to your database.",
+  "description": "QueryCrafter intelligently translates natural language into accurate SQL queries (NLP2SQL). This npm module simplifies database interactions by allowing you to retrieve data using plain English, eliminating the need for complex code. It's a powerful and intuitive way to talk to your database.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
