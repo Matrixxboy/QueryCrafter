@@ -2,18 +2,7 @@ import { QueryCrafter } from "querycrafter";
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Define a type for your environment variables to ensure they exist
-interface IProcessEnv {
-    DB_HOST: string;
-    DB_USER: string;
-    DB_PASSWORD: string;
-    DB_NAME: string;
-    LLM_PROVIDER: "groq" | "openai" | "gemini";
-    LLM_API_KEY: string;
-}
-
-// Assert that process.env matches the interface
-const env = process.env as unknown as IProcessEnv;
+const env = process.env;
 
 async function main() {
     const config = {
@@ -27,12 +16,12 @@ async function main() {
             },
         },
         llm: {
-            provider: "groq",
-            apiKey: env.LLM_API_KEY,
+            provider: "groq", // Choose from groq , gemini , openai
+            model: "llama-3.1-8b-instant", // Add letest NLP model
+            apiKey: env.LLM_API_KEY, // Integrate LLM model API
         },
     };
 
-    // Add a check to ensure the LLM provider is a valid one at runtime
     if (!["groq", "openai", "gemini"].includes(config.llm.provider)) {
         throw new Error(`Invalid LLM provider in .env file: ${config.llm.provider}`);
     }
