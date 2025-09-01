@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist-test",
+    "rootDir": ".",
+    "module": "commonjs",
+    "types": ["mocha", "chai", "node"]
+  },
+  "include": ["tests/**/*.ts", "src/**/*.ts"]
+}
