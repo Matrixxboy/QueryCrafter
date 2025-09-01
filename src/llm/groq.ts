@@ -12,6 +12,7 @@ Question: "${query}"
 Rules:
 - Return ONLY a valid SQL query (no explanation).
 - Use only tables and columns from the schema.
+- Generate SQL for a ${config.dbClient} database.
 `;
 
   const chatCompletion = await groq.chat.completions.create({

@@ -16,6 +16,7 @@ export class QueryCrafter {
   private knex: Knex;
   private llmConfig: LLMConfig;
   private dbName: string;
+  private dbClient?: string;
   private extractSchema: (knex: Knex, dbName: string) => Promise<Schema>;
   private askLLM: (query: string, schema: Schema, config: LLMConfig) => Promise<string>;
 
@@ -27,7 +28,8 @@ export class QueryCrafter {
     this.llmConfig = {
       provider: llm.provider,
       apiKey: llm.apiKey,
-      model: llm.model
+      model: llm.model,
+      dbClient: db.client as string,
     };
     if (typeof db.connection === 'object' && db.connection !== null && 'database' in db.connection) {
       this.dbName = (db.connection as any).database;

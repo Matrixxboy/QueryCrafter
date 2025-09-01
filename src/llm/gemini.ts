@@ -13,6 +13,7 @@ Question: "${query}"
 Rules:
 - Return ONLY a valid SQL query (no explanation).
 - Use only tables and columns from the schema.
+- Generate SQL for a ${config.dbClient} database.
 `;
 
   const result = await model.generateContent(prompt);

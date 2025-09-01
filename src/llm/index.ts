@@ -7,6 +7,7 @@ export interface LLMConfig {
   provider: string;
   apiKey: string;
   model?: string;
+  dbClient?: string; // Add dbClient to LLMConfig
 }
 
 export async function askLLM(query: string, schema: Schema, config: LLMConfig): Promise<string> {
