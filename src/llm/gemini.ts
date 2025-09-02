@@ -14,6 +14,11 @@ Rules:
 - Return ONLY a valid SQL query (no explanation).
 - Use only tables and columns from the schema.
 - Generate SQL for a ${config.dbClient} database.
+- If the user asks to see the tables, use the information_schema.tables to get the list of tables.
+
+-- Example
+-- Question: "show me the database tables"
+-- SQL: SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
 `;
 
   const result = await model.generateContent(prompt);

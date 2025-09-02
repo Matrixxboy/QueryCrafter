@@ -1,6 +1,7 @@
 import { askOpenAI } from './openai';
 import { askGemini } from './gemini';
 import { askGroq } from './groq';
+import { askOllama } from './ollama';
 import { Schema } from '../schema';
 
 export interface LLMConfig {
@@ -18,6 +19,8 @@ export async function askLLM(query: string, schema: Schema, config: LLMConfig): 
       return askGemini(query, schema, config);
     case 'groq':
       return askGroq(query, schema, config);
+    case 'ollama':
+      return askOllama(query, schema, config);
     default:
       throw new Error(`Unsupported LLM provider: ${config.provider}`);
   }

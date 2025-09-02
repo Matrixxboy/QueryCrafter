@@ -1,4 +1,4 @@
-import { QueryCrafter } from "querycrafter";
+import { QueryCrafter } from "./src";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -8,7 +8,8 @@ interface IProcessEnv {
     DB_USER: string;
     DB_PASSWORD: string;
     DB_NAME: string;
-    LLM_PROVIDER: "groq" | "openai" | "gemini";
+    DB_PORT: string;
+    LLM_PROVIDER: "groq" | "openai" | "gemini" | "ollama";
     LLM_API_KEY: string;
     LLM_MODEL: string;
 }
@@ -23,8 +24,9 @@ async function main() {
             connection: {
                 host: env.DB_HOST,
                 user: env.DB_USER,
-                password: env.DB_PASSWORD,
+                password: "Dev!123#",
                 database: env.DB_NAME,
+                port: parseInt(env.DB_PORT, 10),
             },
         },
         llm: {
@@ -35,13 +37,13 @@ async function main() {
     };
 
     // Add a check to ensure the LLM provider is a valid one at runtime
-    if (!["groq", "openai", "gemini"].includes(config.llm.provider)) {
+    if (!["groq", "openai", "gemini", "ollama"].includes(config.llm.provider)) {
         throw new Error(`Invalid LLM provider in .env file: ${config.llm.provider}`);
     }
 
     try {
         const crafter = new QueryCrafter(config);
-        const nlpQuery = "show me all user whose email start with user and has role of user";
+        const nlpQuery = "show me the database tables";
 
         console.log(`\nOriginal Query: "${nlpQuery}"\n`);
 

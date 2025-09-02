@@ -22,8 +22,11 @@ export class QueryCrafter {
 
   constructor({ db, llm, extractSchema = defaultExtractSchema, askLLM = defaultAskLLM }: QueryCrafterConfig) {
     this.knex = knex(db);
-    if (!llm || !llm.provider || !llm.apiKey) {
-      throw new Error("LLM provider and API key are required in the constructor.");
+    if (!llm || !llm.provider) {
+      throw new Error("LLM provider is required in the constructor.");
+    }
+    if (llm.provider !== 'ollama' && !llm.apiKey) {
+      throw new Error("API key is required for the selected LLM provider.");
     }
     this.llmConfig = {
       provider: llm.provider,
