@@ -9,7 +9,7 @@ interface QueryCrafterConfig {
   db: Knex.Config;
   llm: LLMConfig;
   extractSchema?: (knex: Knex, dbName: string) => Promise<Schema>;
-  askLLM?: (query: string, schema: Schema, config: LLMConfig) => Promise<string>;
+  askLLM?: (query: string, schema: Schema, config: LLMConfig, dbName: string) => Promise<string>;
 }
 
 export class QueryCrafter {
@@ -18,7 +18,7 @@ export class QueryCrafter {
   private dbName: string;
   private dbClient?: string;
   private extractSchema: (knex: Knex, dbName: string) => Promise<Schema>;
-  private askLLM: (query: string, schema: Schema, config: LLMConfig) => Promise<string>;
+  private askLLM: (query: string, schema: Schema, config: LLMConfig, dbName: string) => Promise<string>;
 
   constructor({ db, llm, extractSchema = defaultExtractSchema, askLLM = defaultAskLLM }: QueryCrafterConfig) {
     this.knex = knex(db);
@@ -47,7 +47,7 @@ export class QueryCrafter {
 
   async convert(nlpQuery: string): Promise<string> {
     const schema = await this.extractSchema(this.knex, this.dbName);
-    const sql = await this.askLLM(nlpQuery, schema, this.llmConfig);
+    const sql = await this.askLLM(nlpQuery, schema, this.llmConfig, this.dbName);
     
     // The key change: The validateSQL function now returns the cleaned SQL string
     const cleanSql = validateSQL(sql, schema);
