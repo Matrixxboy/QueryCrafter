@@ -79,6 +79,7 @@ DB_NAME=your_db_name
 
 LLM_PROVIDER=groq   # or openai, gemini
 LLM_API_KEY=your_llm_api_key
+LLM_MODEL=Selected_llm_model
 ```
 
 ---
