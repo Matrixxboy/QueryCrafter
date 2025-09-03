@@ -1,4 +1,4 @@
-import { QueryCrafter } from "querycrafter";
+import { QueryCrafter } from "./src/index.ts";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,13 +11,13 @@ async function main() {
             connection: {
                 host: env.DB_HOST,
                 user: env.DB_USER,
-                password: env.DB_PASSWORD,
+                password: "Dev!123#",
                 database: env.DB_NAME,
             },
         },
         llm: {
-            provider: "groq", // Choose from groq , gemini , openai
-            model: "llama-3.1-8b-instant", // Add letest NLP model
+            provider: env.LLM_PROVIDER, // Choose from groq , gemini , openai
+            model: env.LLM_MODEL, // Add latest NLP model
             apiKey: env.LLM_API_KEY, // Integrate LLM model API
         },
     };

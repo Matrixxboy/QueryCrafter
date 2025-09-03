@@ -8,10 +8,10 @@ export interface LLMConfig {
   provider: string;
   apiKey: string;
   model?: string;
-  dbClient?: string; // Add dbClient to LLMConfig
+  dbClient?: string;
 }
 
-export async function askLLM(query: string, schema: Schema, config: LLMConfig, dbName: string): Promise<string> {
+export async function askLLM(query: string, schema: Schema, config: LLMConfig): Promise<string> {
   switch (config.provider) {
     case 'openai':
       return askOpenAI(query, schema, config);
@@ -20,7 +20,7 @@ export async function askLLM(query: string, schema: Schema, config: LLMConfig, d
     case 'groq':
       return askGroq(query, schema, config);
     case 'ollama':
-      return askOllama(query, schema, config, dbName);
+      return askOllama(query, schema, config);
     default:
       throw new Error(`Unsupported LLM provider: ${config.provider}`);
   }

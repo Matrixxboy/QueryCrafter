@@ -43,7 +43,7 @@ async function main() {
 
     try {
         const crafter = new QueryCrafter(config);
-        const nlpQuery = "show me the database tables";
+        const nlpQuery = "show me the highest salary from employees";
 
         console.log(`\nOriginal Query: "${nlpQuery}"\n`);
 
