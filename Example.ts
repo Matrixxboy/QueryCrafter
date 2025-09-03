@@ -43,7 +43,7 @@ async function main() {
 
     try {
         const crafter = new QueryCrafter(config);
-        const nlpQuery = "show me the highest salary from employees";
+        const nlpQuery = "show me the list of employees whose names start with 'F' and order them by their hire date in descending order";
 
         console.log(`\nOriginal Query: "${nlpQuery}"\n`);
 

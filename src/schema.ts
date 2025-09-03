@@ -33,7 +33,7 @@ export async function extractSchema(knex: Knex, dbName: string): Promise<Schema>
     rows = result;
   } else if (knex.client.config.client === "sqlite3") {
     const tableRows = await knex.raw(`SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';`);
-    
+
     const allColumns: any[] = [];
     for (const table of tableRows) {
       const columnRows = await knex.raw(`PRAGMA table_info(${table.name});`);

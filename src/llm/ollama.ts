@@ -17,8 +17,8 @@ Strict Output Rules:
 2. Do NOT add explanations, comments, markdown, or formatting.
 3. Do NOT include words like "SQL", "query", "answer", "output", or any extra text.
 4. Output must be exactly ONE valid SQL statement ending with a semicolon.
-5. Use only tables and columns from the schema.
-6. Generate SQL for a ${config.dbClient} database.
+5. Generate SQL for a ${config.dbClient} database, and correctly interpret table and column names for consistent use in ${config.dbClient} based queries.
+6. strictly Use only tables and columns from the schema.
 7. Do NOT use semicolons inside except at the very end.
 8. The entire SQL must be returned in a **single line** without line breaks or indentation.
 
