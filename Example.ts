@@ -1,4 +1,4 @@
-import { QueryCrafter } from "./src";
+import { QueryCrafter } from "querycrafter";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -31,7 +31,7 @@ async function main() {
         },
         llm: {
             provider: env.LLM_PROVIDER, // Choose model from groq , gemini , openai
-            model: env.LLM_MODEL, // Add letest NLP model
+            // model: env.LLM_MODEL, // Add letest NLP model
             apiKey: env.LLM_API_KEY, // Integrate LLM model API
         },
     };
@@ -43,7 +43,7 @@ async function main() {
 
     try {
         const crafter = new QueryCrafter(config);
-        const nlpQuery = "show me the list of employees whose names start with 'F' and order them by their hire date in descending order";
+        const nlpQuery = "show me all user whose email have biz in it.";
 
         console.log(`\nOriginal Query: "${nlpQuery}"\n`);
 

@@ -10,7 +10,7 @@ const env = process.env as {
   DB_USER: string;
   DB_PASSWORD: string;
   DB_NAME: string;
-  LLM_PROVIDER: "groq" | "openai" | "gemini";
+  LLM_PROVIDER: "groq" | "openai" | "gemini" | "ollama";
   LLM_API_KEY: string;
 };
 
@@ -26,7 +26,7 @@ async function runQuery() {
       },
     },
     llm: {
-      provider: env.LLM_PROVIDER, // Choose model from groq , gemini , openai
+      provider: env.LLM_PROVIDER, // Choose model from groq , gemini , openai , ollama
       model: env.LLM_MODEL, // Add letest NLP model
       apiKey: env.LLM_API_KEY, // Integrate LLM model API
     },
@@ -75,7 +75,7 @@ async function main() {
             },
         },
         llm: {
-            provider: "groq", // Choose from groq , gemini , openai
+            provider: "groq", // Choose from groq , gemini , openai , ollama 
             model: "llama-3.1-8b-instant", // Add letest NLP model
             apiKey: env.LLM_API_KEY, // Integrate LLM model API
         },

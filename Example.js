@@ -1,4 +1,4 @@
-import { QueryCrafter } from "./src/index.ts";
+import { QueryCrafter } from 'querycrafter';
 import dotenv from 'dotenv';
 dotenv.config();
 
